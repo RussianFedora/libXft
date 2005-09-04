@@ -2,7 +2,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: xorg-x11-%{pkgname}
 Version: 2.1.7
-Release: 3
+Release: 4
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -13,6 +13,9 @@ BuildRequires: xorg-x11-proto-devel
 BuildRequires: xorg-x11-libX11-devel
 BuildRequires: xorg-x11-libXrender-devel
 BuildRequires: freetype-devel
+BuildRequires: fontconfig-devel >= 2.2
+
+Requires: fontconfig >= 2.2
 
 Provides: %{pkgname}
 Conflicts: XFree86-libs, xorg-x11-libs
@@ -66,6 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libXft.so.2.1.2
 
 %files devel
+%defattr(-,root,root,-)
 #%{_bindir}/xft-config
 %dir %{_includedir}/X11
 %dir %{_includedir}/X11/Xft
@@ -80,6 +84,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Wed Aug 24 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-4
+- Added "BuildRequires: fontconfig-devel >= 2.2" dependency that was
+  previously missed.  Also added "Requires: fontconfig >= 2.2" runtime
+  dependency.
+- Added missing defattr to devel subpackage.
+
 * Wed Aug 24 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-3
 - Added freetype-devel build dependency.
 
