@@ -84,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
-* Wed Aug 24 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-4
+* Sun Sep 4 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-4
 - Added "BuildRequires: fontconfig-devel >= 2.2" dependency that was
   previously missed.  Also added "Requires: fontconfig >= 2.2" runtime
   dependency.
