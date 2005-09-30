@@ -1,23 +1,21 @@
-%define pkgname libXft
 Summary: X.Org X11 libXft runtime library
-Name: xorg-x11-%{pkgname}
+Name: libXft
 Version: 2.1.7
-Release: 4
+Release: 5
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
-Source0: %{pkgname}-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0: http://xorg.freedesktop.org/X11R7.0-RC0/everything/%{name}-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: xorg-x11-proto-devel
-BuildRequires: xorg-x11-libX11-devel
-BuildRequires: xorg-x11-libXrender-devel
+BuildRequires: libX11-devel
+BuildRequires: libXrender-devel
 BuildRequires: freetype-devel
 BuildRequires: fontconfig-devel >= 2.2
 
 Requires: fontconfig >= 2.2
 
-Provides: %{pkgname}
 Conflicts: XFree86-libs, xorg-x11-libs
 
 %description
@@ -28,22 +26,27 @@ Summary: X.Org X11 libXft development package
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
-Provides: %{pkgname}-devel
 Conflicts: XFree86-devel, xorg-x11-devel
 
 %description devel
 X.Org X11 libXft development package
 
 %prep
-%setup -q -c %{name}-%{version}
+%setup -q
+
+# Disable static library creation by default.
+%define with_static 0
 
 %build
-cd %{pkgname}-%{version}
-%configure
+
+%configure \
+%if ! %{with_static}
+	--disable-static
+%endif
 make
 
 %install
-cd %{pkgname}-%{version}
+
 rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
@@ -63,19 +66,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc
+%doc AUTHORS COPYING README INSTALL ChangeLog
 %dir %{_libdir}
 %{_libdir}/libXft.so.2
 %{_libdir}/libXft.so.2.1.2
 
 %files devel
 %defattr(-,root,root,-)
+%defattr(-,root,root,-)
 #%{_bindir}/xft-config
 %dir %{_includedir}/X11
 %dir %{_includedir}/X11/Xft
 %{_includedir}/X11/Xft/Xft.h
 %{_includedir}/X11/Xft/XftCompat.h
+%if %{with_static}
 %{_libdir}/libXft.a
+%endif
 %{_libdir}/libXft.so
 %{_libdir}/pkgconfig/xft.pc
 %dir %{_mandir}
@@ -84,6 +90,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Thu Sep 29 2005 Mike A. Harris <mharris.com> 2.1.7-5
+- Renamed package to remove xorg-x11 from the name due to unanimous decision
+  between developers.
+- Use Fedora Extras style BuildRoot tag.
+- Disable static library creation by default.
+- Add missing defattr to devel subpackage
+- Add missing documentation files to doc macro
+- Fix BuildRequires to use new style X library package names
+
 * Sun Sep 4 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-4
 - Added "BuildRequires: fontconfig-devel >= 2.2" dependency that was
   previously missed.  Also added "Requires: fontconfig >= 2.2" runtime
