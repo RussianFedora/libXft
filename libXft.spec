@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.8
-Release: 1
+Release: 2
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -16,7 +16,7 @@ BuildRequires: fontconfig-devel >= 2.2
 
 Requires: fontconfig >= 2.2
 
-Conflicts: XFree86-libs, xorg-x11-libs
+Obsoletes: XFree86-libs, xorg-x11-libs
 
 %description
 X.Org X11 libXft runtime library
@@ -26,7 +26,7 @@ Summary: X.Org X11 libXft development package
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
-Conflicts: XFree86-devel, xorg-x11-devel
+Obsoletes: XFree86-devel, xorg-x11-devel
 
 %description devel
 X.Org X11 libXft development package
@@ -90,6 +90,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Fri Nov 11 2005 Mike A. Harris <mharris@redhat.com> 2.1.8-2
+- Changed 'Conflicts: XFree86-devel, xorg-x11-devel' to 'Obsoletes'
+- Changed 'Conflicts: XFree86-libs, xorg-x11-libs' to 'Obsoletes'
+
+
 * Mon Oct 24 2005 Mike A. Harris <mharris@redhat.com> 2.1.8-1
 - Updated libXft to version 2.1.8 from X11R7 RC1
 
