@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.8
-Release: 2
+Release: 2.1
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -90,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
+- rebuilt
+
 * Fri Nov 11 2005 Mike A. Harris <mharris@redhat.com> 2.1.8-2
 - Changed 'Conflicts: XFree86-devel, xorg-x11-devel' to 'Obsoletes'
 - Changed 'Conflicts: XFree86-libs, xorg-x11-libs' to 'Obsoletes'
