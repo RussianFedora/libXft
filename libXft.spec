@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.1.8
-Release: 2.1
+Version: 2.1.8.1
+Release: 1
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -25,6 +25,10 @@ X.Org X11 libXft runtime library
 Summary: X.Org X11 libXft development package
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
+Requires(pre): xorg-x11-filesystem >= 0.99.2-3
+
+Requires: libXrender-devel
+
 
 Obsoletes: XFree86-devel, xorg-x11-devel
 
@@ -90,6 +94,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Tue Dec 13 2005 Mike A. Harris <mharris@redhat.com> 2.1.8.1-1
+- Updated libXft to version 2.1.8.1 from X11R7 RC3
+- Added "Requires(pre): xorg-x11-filesystem >= 0.99.2-3", to ensure
+  that /usr/lib/X11 and /usr/include/X11 pre-exist.
+- Removed 'x' suffix from manpage directories to match RC3 upstream.
+- Added "Requires: libXrender-devel" to -devel subpackage for (#175465)
+
 * Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
 - rebuilt
 
