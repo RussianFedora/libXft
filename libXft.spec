@@ -1,13 +1,14 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.1.8.1
+Version: 2.1.8.2
 Release: 1
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
-Source0: http://xorg.freedesktop.org/X11R7.0-RC0/everything/%{name}-%{version}.tar.bz2
+Source0: http://xorg.freedesktop.org/releases/X11R7.0-RC4/everything/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires: pkgconfig
 BuildRequires: xorg-x11-proto-devel
 BuildRequires: libX11-devel
 BuildRequires: libXrender-devel
@@ -28,7 +29,6 @@ Requires: %{name} = %{version}-%{release}
 Requires(pre): xorg-x11-filesystem >= 0.99.2-3
 
 Requires: libXrender-devel
-
 
 Obsoletes: XFree86-devel, xorg-x11-devel
 
@@ -94,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Fri Dec 16 2005 Mike A. Harris <mharris@redhat.com> 2.1.8.2-1
+- Updated libXft to version 2.1.8.2 from X11R7 RC4
+
 * Tue Dec 13 2005 Mike A. Harris <mharris@redhat.com> 2.1.8.1-1
 - Updated libXft to version 2.1.8.1 from X11R7 RC3
 - Added "Requires(pre): xorg-x11-filesystem >= 0.99.2-3", to ensure
@@ -108,11 +111,10 @@ rm -rf $RPM_BUILD_ROOT
 - Changed 'Conflicts: XFree86-devel, xorg-x11-devel' to 'Obsoletes'
 - Changed 'Conflicts: XFree86-libs, xorg-x11-libs' to 'Obsoletes'
 
-
 * Mon Oct 24 2005 Mike A. Harris <mharris@redhat.com> 2.1.8-1
 - Updated libXft to version 2.1.8 from X11R7 RC1
 
-* Thu Sep 29 2005 Mike A. Harris <mharris.com> 2.1.7-5
+* Thu Sep 29 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-5
 - Renamed package to remove xorg-x11 from the name due to unanimous decision
   between developers.
 - Use Fedora Extras style BuildRoot tag.
