@@ -1,11 +1,11 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.8.2
-Release: 2
+Release: 3
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
-Source0: http://xorg.freedesktop.org/releases/X11R7.0-RC4/everything/%{name}-%{version}.tar.bz2
+Source0: http://xorg.freedesktop.org/releases/X11R7.0/src/everything/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: pkgconfig
@@ -28,7 +28,10 @@ Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires(pre): xorg-x11-filesystem >= 0.99.2-3
 
+Requires: xorg-x11-proto-devel
 Requires: libXrender-devel
+Requires: fontconfig-devel
+Requires: freetype-devel
 
 Obsoletes: XFree86-devel, xorg-x11-devel
 
@@ -71,12 +74,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README INSTALL ChangeLog
-%dir %{_libdir}
 %{_libdir}/libXft.so.2
 %{_libdir}/libXft.so.2.1.2
 
 %files devel
-%defattr(-,root,root,-)
 %defattr(-,root,root,-)
 #%{_bindir}/xft-config
 %dir %{_includedir}/X11
@@ -88,12 +89,14 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %{_libdir}/libXft.so
 %{_libdir}/pkgconfig/xft.pc
-%dir %{_mandir}
 #%{_mandir}/man1/xft-config.1.gz
-%dir %{_mandir}/man3
+#%dir %{_mandir}/man3x
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Thu Feb  2 2006 Mike A. Harris <mharris@redhat.com> 2.1.8.2-3
+- Added missing dependencies to devel subpackage to fix (#176744)
+
 * Mon Jan 23 2006 Mike A. Harris <mharris@redhat.com> 2.1.8.2-2
 - Bumped and rebuilt
 
