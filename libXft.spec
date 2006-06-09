@@ -1,12 +1,13 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.8.2
-Release: 3.2
+Release: 4
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
-Source0: http://xorg.freedesktop.org/releases/X11R7.0/src/everything/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+Source0: http://xorg.freedesktop.org/releases/X11R7.0/src/everything/%{name}-%{version}.tar.bz2
 
 BuildRequires: pkgconfig
 BuildRequires: xorg-x11-proto-devel
@@ -25,8 +26,8 @@ X.Org X11 libXft runtime library
 %package devel
 Summary: X.Org X11 libXft development package
 Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
 Requires(pre): xorg-x11-filesystem >= 0.99.2-3
+Requires: %{name} = %{version}-%{release}
 
 Requires: xorg-x11-proto-devel
 Requires: libXrender-devel
@@ -53,9 +54,9 @@ X.Org X11 libXft development package
 make
 
 %install
-
 rm -rf $RPM_BUILD_ROOT
-%makeinstall
+
+make install DESTDIR=$RPM_BUILD_ROOT
 
 # FIXME: There's no real good reason to ship these anymore, as pkg-config
 # is the official way to detect flags, etc. now.
@@ -94,13 +95,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
-* Fri Feb 10 2006 Jesse Keating <jkeating@redhat.com> - 2.1.8.2-3.2
+* Fri Jun 09 2006 Mike A. Harris <mharris@redhat.com> 2.1.8.2-4
+- Replace "makeinstall" with "make install DESTDIR=..."
+
+* Fri Feb 10 2006 Jesse Keating <jkeating@redhat.com> 2.1.8.2-3.2
 - bump again for double-long bug on ppc(64)
 
-* Tue Feb 07 2006 Jesse Keating <jkeating@redhat.com> - 2.1.8.2-3.1
+* Tue Feb 07 2006 Jesse Keating <jkeating@redhat.com> 2.1.8.2-3.1
 - rebuilt for new gcc4.1 snapshot and glibc changes
 
-* Thu Feb  2 2006 Mike A. Harris <mharris@redhat.com> 2.1.8.2-3
+* Thu Feb 02 2006 Mike A. Harris <mharris@redhat.com> 2.1.8.2-3
 - Added missing dependencies to devel subpackage to fix (#176744)
 
 * Mon Jan 23 2006 Mike A. Harris <mharris@redhat.com> 2.1.8.2-2
@@ -135,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 - Add missing documentation files to doc macro
 - Fix BuildRequires to use new style X library package names
 
-* Sun Sep 4 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-4
+* Sun Sep 04 2005 Mike A. Harris <mharris@redhat.com> 2.1.7-4
 - Added "BuildRequires: fontconfig-devel >= 2.2" dependency that was
   previously missed.  Also added "Requires: fontconfig >= 2.2" runtime
   dependency.
