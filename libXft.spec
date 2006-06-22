@@ -1,22 +1,22 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.1.8.2
-Release: 4
+Version: 2.1.10
+Release: 1
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0: http://xorg.freedesktop.org/releases/X11R7.0/src/everything/%{name}-%{version}.tar.bz2
+Source0: http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 
 BuildRequires: pkgconfig
 BuildRequires: xorg-x11-proto-devel
 BuildRequires: libX11-devel
 BuildRequires: libXrender-devel
-BuildRequires: freetype-devel
-BuildRequires: fontconfig-devel >= 2.2
+BuildRequires: freetype-devel >= 2.1.9-2
+BuildRequires: fontconfig-devel >= 2.2-1
 
-Requires: fontconfig >= 2.2
+Requires: fontconfig >= 2.2-1
 
 Obsoletes: XFree86-libs, xorg-x11-libs
 
@@ -31,8 +31,8 @@ Requires: %{name} = %{version}-%{release}
 
 Requires: xorg-x11-proto-devel
 Requires: libXrender-devel
-Requires: fontconfig-devel
-Requires: freetype-devel
+Requires: fontconfig-devel >= 2.2-1
+Requires: freetype-devel >= 2.1.9-2
 
 Obsoletes: XFree86-devel, xorg-x11-devel
 
@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README INSTALL ChangeLog
+%doc AUTHORS COPYING README INSTALL ChangeLog NEWS
 %{_libdir}/libXft.so.2
 %{_libdir}/libXft.so.2.1.2
 
@@ -95,6 +95,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Wed Jun 21 2006 Mike A. Harris <mharris@redhat.com> 2.1.10
+- Updated libXft to version 2.1.10
+- Specify freetype dependencies as >= 2.1.9-1
+- Futureproof builds by adding release number to fontconfig dependencies.
+
 * Fri Jun 09 2006 Mike A. Harris <mharris@redhat.com> 2.1.8.2-4
 - Replace "makeinstall" with "make install DESTDIR=..."
 
