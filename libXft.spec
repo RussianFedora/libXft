@@ -7,7 +7,7 @@ Group: System Environment/Libraries
 URL: http://www.x.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0: http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
+Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
 
 BuildRequires: pkgconfig
 BuildRequires: xorg-x11-proto-devel
