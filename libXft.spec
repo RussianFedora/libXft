@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.10
-Release: 1
+Release: 1.1
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - sh: line 0: fg: no job control
+- rebuild
+
 * Wed Jun 21 2006 Mike A. Harris <mharris@redhat.com> 2.1.10
 - Updated libXft to version 2.1.10
 - Specify freetype dependencies as >= 2.1.9-1
