@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.12
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: MIT/X11
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README INSTALL ChangeLog NEWS
+%doc AUTHORS COPYING README ChangeLog NEWS
 %{_libdir}/libXft.so.2
 %{_libdir}/libXft.so.2.1.2
 
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Sat Apr 21 2007 Matthias Clasen <mclasen@redhat.com> 2.1.12-2
+- Don't install INSTALL
+
 * Fri Jan 05 2007 Adam Jackson <ajax@redhat.com> 2.1.12-1.fc7
 - Update to 2.1.12
 
