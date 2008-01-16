@@ -1,15 +1,14 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.12
-Release: 3%{?dist}
-License: MIT/X11
+Release: 4%{?dist}
+License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
 
-BuildRequires: pkgconfig
 BuildRequires: xorg-x11-proto-devel
 BuildRequires: libX11-devel
 BuildRequires: libXrender-devel
@@ -17,8 +16,6 @@ BuildRequires: freetype-devel >= 2.1.9-2
 BuildRequires: fontconfig-devel >= 2.2-1
 
 Requires: fontconfig >= 2.2-1
-
-Obsoletes: XFree86-libs, xorg-x11-libs
 
 %description
 X.Org X11 libXft runtime library
@@ -29,12 +26,10 @@ Group: Development/Libraries
 Requires(pre): xorg-x11-filesystem >= 0.99.2-3
 Requires: %{name} = %{version}-%{release}
 
-Requires: xorg-x11-proto-devel
+Requires: xorg-x11-proto-devel pkgconfig
 Requires: libXrender-devel
 Requires: fontconfig-devel >= 2.2-1
 Requires: freetype-devel >= 2.1.9-2
-
-Obsoletes: XFree86-devel, xorg-x11-devel
 
 %description devel
 X.Org X11 libXft development package
@@ -51,7 +46,7 @@ X.Org X11 libXft development package
 %if ! %{with_static}
 	--disable-static
 %endif
-make
+make %{?_smp_mflags} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -74,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README ChangeLog NEWS
+%doc AUTHORS COPYING README ChangeLog
 %{_libdir}/libXft.so.2
 %{_libdir}/libXft.so.2.1.2
 
@@ -95,6 +90,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Tue Jan 15 2008 parag <paragn@fedoraproject.org> - 2.1.12-4
+- Merge-Review #226074
+- Removed XFree86-libs, xorg-x11-libs XFree86-devel, xorg-x11-devel as Obsoletes
+- Removed BR:pkgconfig
+- Removed zero-length NEWS file
+
 * Tue Aug 21 2007 Adam Jackson <ajax@redhat.com> - 2.1.12-3
 - Rebuild for build id
 
