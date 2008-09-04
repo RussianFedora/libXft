@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.1.12
-Release: 5%{?dist}
+Version: 2.1.13
+Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -70,8 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README ChangeLog
-%{_libdir}/libXft.so.2
-%{_libdir}/libXft.so.2.1.2
+%{_libdir}/libXft.so.2*
 
 %files devel
 %defattr(-,root,root,-)
@@ -90,6 +89,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Thu Sep 04 2008 Adam Jackson <ajax@redhat.com> 2.1.13-1
+- libXft 2.1.13
+
 * Tue Feb 19 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 2.1.12-5
 - Autorebuild for GCC 4.3
 
