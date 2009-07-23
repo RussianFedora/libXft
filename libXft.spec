@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.13
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -23,7 +23,6 @@ X.Org X11 libXft runtime library
 %package devel
 Summary: X.Org X11 libXft development package
 Group: Development/Libraries
-Requires(pre): xorg-x11-filesystem >= 0.99.2-3
 Requires: %{name} = %{version}-%{release}
 
 Requires: xorg-x11-proto-devel pkgconfig
@@ -75,7 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(-,root,root,-)
 #%{_bindir}/xft-config
-%dir %{_includedir}/X11
 %dir %{_includedir}/X11/Xft
 %{_includedir}/X11/Xft/Xft.h
 %{_includedir}/X11/Xft/XftCompat.h
@@ -89,6 +87,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Thu Jul 23 2009 Adam Jackson <ajax@redhat.com> 2.1.13-3
+- Un-require xorg-x11-filesystem
+- Remove useless %%dir
+
 * Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.1.13-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
