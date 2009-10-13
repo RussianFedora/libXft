@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.1.13
-Release: 4%{?dist}
+Version: 2.1.14
+Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -9,9 +9,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
 
-BuildRequires: xorg-x11-proto-devel
-BuildRequires: libX11-devel
-BuildRequires: libXrender-devel
+BuildRequires: pkgconfig(xrender)
 BuildRequires: freetype-devel >= 2.1.9-2
 BuildRequires: fontconfig-devel >= 2.2-1
 
@@ -25,11 +23,6 @@ Summary: X.Org X11 libXft development package
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
-Requires: xorg-x11-proto-devel pkgconfig
-Requires: libXrender-devel
-Requires: fontconfig-devel >= 2.2-1
-Requires: freetype-devel >= 2.1.9-2
-
 %description devel
 X.Org X11 libXft development package
 
@@ -41,10 +34,7 @@ X.Org X11 libXft development package
 
 %build
 
-%configure \
-%if ! %{with_static}
-	--disable-static
-%endif
+%configure --disable-static
 make %{?_smp_mflags} 
 
 %install
@@ -77,9 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/X11/Xft
 %{_includedir}/X11/Xft/Xft.h
 %{_includedir}/X11/Xft/XftCompat.h
-%if %{with_static}
-%{_libdir}/libXft.a
-%endif
 %{_libdir}/libXft.so
 %{_libdir}/pkgconfig/xft.pc
 #%{_mandir}/man1/xft-config.1.gz
@@ -87,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Tue Oct 13 2009 Adam Jackson <ajax@redhat.com> 2.1.14-1
+- libXft 2.1.14
+
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.1.13-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
