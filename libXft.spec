@@ -1,6 +1,6 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.1.14
+Version: 2.2.0
 Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries
@@ -28,9 +28,6 @@ X.Org X11 libXft development package
 
 %prep
 %setup -q
-
-# Disable static library creation by default.
-%define with_static 0
 
 %build
 
@@ -74,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Mon Nov 08 2010 Adam Jackson <ajax@redhat.com> 2.2.0-1
+- libXft 2.2.0
+
 * Tue Oct 13 2009 Adam Jackson <ajax@redhat.com> 2.1.14-1
 - libXft 2.1.14
 
