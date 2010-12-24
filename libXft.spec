@@ -1,13 +1,14 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.1.14
-Release: 1%{?dist}
+Release: 1%{?dist}.2
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
+Patch98: libXft-2.1.14-ubuntu.patch
 
 BuildRequires: pkgconfig(xrender)
 BuildRequires: freetype-devel >= 2.1.9-2
@@ -28,6 +29,7 @@ X.Org X11 libXft development package
 
 %prep
 %setup -q
+%patch98 -p1
 
 # Disable static library creation by default.
 %define with_static 0
@@ -74,6 +76,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Wed Nov  3 2010 Arkady L. Shane <ashejn@yandex-team.ru> - 2.1.14-1.2
+- update lcd patch
+
+* Mon Mar 15 2010 Arkady L. Shane <ashejn@yandex-team.ru> - 2.1.14-1.1
+- apply Ubuntu lcd patch
+
 * Tue Oct 13 2009 Adam Jackson <ajax@redhat.com> 2.1.14-1
 - libXft 2.1.14
 
