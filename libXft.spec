@@ -1,20 +1,22 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.1.14
-Release: 1%{?dist}.2
+Version: 2.2.0
+Release: 2%{?dist}.1
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
-Patch98: libXft-2.1.14-ubuntu.patch
+Patch0:	100-libXft-2.1.10-lcd-filter-3.patch
 
 BuildRequires: pkgconfig(xrender)
 BuildRequires: freetype-devel >= 2.1.9-2
 BuildRequires: fontconfig-devel >= 2.2-1
 
 Requires: fontconfig >= 2.2-1
+
+Provides: libXft-rfremix = %{version}-%{release}
 
 %description
 X.Org X11 libXft runtime library
@@ -29,10 +31,7 @@ X.Org X11 libXft development package
 
 %prep
 %setup -q
-%patch98 -p1
-
-# Disable static library creation by default.
-%define with_static 0
+%patch0 -p1 -b .lcdfilter
 
 %build
 
@@ -76,11 +75,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
-* Wed Nov  3 2010 Arkady L. Shane <ashejn@yandex-team.ru> - 2.1.14-1.2
-- update lcd patch
+* Mon Mar 18 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 2.2.0-2.1
+- apply ubuntu lcdfilter patch
 
-* Mon Mar 15 2010 Arkady L. Shane <ashejn@yandex-team.ru> - 2.1.14-1.1
-- apply Ubuntu lcd patch
+* Mon Feb 07 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Mon Nov 08 2010 Adam Jackson <ajax@redhat.com> 2.2.0-1
+- libXft 2.2.0
 
 * Tue Oct 13 2009 Adam Jackson <ajax@redhat.com> 2.1.14-1
 - libXft 2.1.14
