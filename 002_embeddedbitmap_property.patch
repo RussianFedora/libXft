@@ -1,0 +1,32 @@
+--- xft-2.1.12.orig/src/xftfreetype.c
++++ xft-2.1.12/src/xftfreetype.c
+@@ -380,7 +380,7 @@
+     double	    dsize;
+     double	    aspect;
+     FcMatrix	    *font_matrix;
+-    FcBool	    hinting, vertical_layout, autohint, global_advance;
++    FcBool	    hinting, vertical_layout, autohint, global_advance, embeddedbitmap;
+ #ifdef FC_HINT_STYLE
+     int             hint_style;
+ #endif
+@@ -509,8 +509,19 @@
+      */
+     fi->load_flags = FT_LOAD_DEFAULT;
+ 
++    /* disable bitmaps if requested */
++    switch (FcPatternGetBool (pattern, FC_EMBEDDED_BITMAP, 0, &embeddedbitmap)) {
++    case FcResultNoMatch:
++	embeddedbitmap = FcTrue;
++	break;
++    case FcResultMatch:
++	break;
++    default:
++	goto bail1;
++    }
++
+     /* disable bitmaps when anti-aliasing or transforming glyphs */
+-    if (fi->antialias || fi->transform)
++    if ((fi->antialias && embeddedbitmap == FcFalse) || fi->transform)
+ 	fi->load_flags |= FT_LOAD_NO_BITMAP;
+     
+     /* disable hinting if requested */
