@@ -7,7 +7,7 @@ Group: System Environment/Libraries
 URL: http://www.x.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
+Source0: http://www.x.org/archive/individual/lib//%{name}-%{version}.tar.bz2
 Patch98: libXft-2.1.10-lcd-filter-3.patch
 Patch99: 002_embeddedbitmap_property.patch
 
