@@ -1,7 +1,7 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
 Version: 2.2.0
-Release: 2%{?dist}.1
+Release: 3%{?dist}.1.R
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -75,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Xft.3*
 
 %changelog
+* Tue Feb  7 2012 Arkady L. Shane <ashejn@yandex-team.ru> - 2.2.0-3.1.R
+- rebuilt
+
 * Mon Mar 18 2011 Arkady L. Shane <ashejn@yandex-team.ru> - 2.2.0-2.1
 - apply ubuntu lcdfilter patch
 
